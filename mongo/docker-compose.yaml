@@ -1,0 +1,23 @@
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: Abc12345
+    volumes:
+      - mongo_data:/var/lib/mongodb/data
+    ports:
+      - 27018:27017
+    networks:
+      - docker_stack
+    restart: unless-stopped
+
+networks:
+  docker_stack:
+    external: true
+
+volumes:
+  mongo_data:
+
+
