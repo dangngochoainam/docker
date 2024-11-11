@@ -3,7 +3,7 @@ services:
     image: postgres:15
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-root}
-      POSTGRES_PASSWORD: ${POSTGRES__PASSWORD:-Abc@12345}
+      POSTGRES_PASSWORD: ${POSTGRES__PASSWORD:-Abc12345}
       TZ: "UTC"
     volumes:
       - postgres_data:/var/lib/postgresql/data
