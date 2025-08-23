@@ -1,0 +1,114 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "alt+up",
+    "command": "editor.action.moveLinesUpAction",
+    "when": "Move current line/selection up"
+  },
+  {
+    "key": "alt+down",
+    "command": "editor.action.moveLinesDownAction",
+    "when": "Move current line/selection down"
+  },
+
+  {
+    "key": "ctrl+shift+n",
+    "command": "workbench.action.newWindow",
+    "when": "Open a new VSCode window"
+  },
+  {
+    "key": "ctrl+n",
+    "command": "workbench.action.files.newUntitledFile",
+    "when": "Create a new untitled file"
+  },
+  {
+    "key": "alt+left",
+    "command": "workbench.action.navigateBack",
+    "when": "Go back to previous cursor location"
+  },
+  {
+    "key": "alt+right",
+    "command": "workbench.action.navigateForward",
+    "when": "Go forward to next cursor location"
+  },
+  {
+    "key": "ctrl+space",
+    "command": "editor.action.triggerSuggest",
+    "when": "Show IntelliSense suggestions"
+  },
+  {
+    "key": "alt+shift+f",
+    "command": "editor.action.format",
+    "when": "Format the whole document"
+  },
+  {
+    "key": "alt+shift+o",
+    "command": "editor.action.organizeImports",
+    "when": "Organize imports in the file"
+  },
+  {
+    "key": "alt+shift+down",
+    "command": "editor.action.copyLinesDownAction",
+    "when": "Copy current line/selection below"
+  },
+  {
+    "key": "alt+shift+up",
+    "command": "editor.action.copyLinesUpAction",
+    "when": "Copy current line/selection above"
+  },
+  {
+    "key": "ctrl+s",
+    "command": "workbench.action.files.save",
+    "when": "Save current file"
+  },
+  {
+    "key": "ctrl+f",
+    "command": "actions.find",
+    "when": "Open find/search within file"
+  },
+  {
+    "key": "ctrl+d",
+    "command": "editor.action.addSelectionToNextFindMatch",
+    "when": "Select next match of current word"
+  },
+  {
+    "key": "ctrl+y",
+    "command": "redo",
+    "when": "Redo last undone action"
+  },
+  {
+    "key": "ctrl+z",
+    "command": "undo",
+    "when": "Undo last action"
+  },
+  {
+    "key": "ctrl+a",
+    "command": "editor.action.selectAll",
+    "when": "Select all text in editor"
+  },
+  {
+    "key": "ctrl+c",
+    "command": "editor.action.clipboardCopyAction",
+    "when": "Copy selected text"
+  },
+  {
+    "key": "ctrl+x",
+    "command": "editor.action.clipboardCutAction",
+    "when": "Cut selected text"
+  },
+  {
+    "key": "ctrl+v",
+    "command": "editor.action.clipboardPasteAction",
+    "when": "Paste from clipboard"
+  },
+  {
+    "key": "ctrl+/",
+    "command": "editor.action.commentLine",
+    "when": "Toggle line comment"
+  },
+  {
+    "key": "F12",
+    "command": "editor.action.revealDefinition",
+    "when": "Go to definition of symbol"
+  }
+]
