@@ -1,0 +1,14 @@
+services:
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 60 --cleanup ${WATCHTOWER_CONTAINER_NAME}  # it will auto watch all container and update them if there is new version
+    networks:
+      - docker_stack
+    restart: always
+
+networks:
+  docker_stack:
+    external: true
