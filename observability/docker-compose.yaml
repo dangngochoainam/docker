@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   prometheus:
     image: prom/prometheus:latest
@@ -15,17 +13,6 @@ services:
       - docker_stack
     restart: unless-stopped
 
-  grafana:
-    image: grafana/grafana:latest
-    container_name: grafana
-    volumes:
-      - grafana_data:/var/lib/grafana
-    ports:
-      - "3000:3000"
-    networks:
-      - docker_stack
-    restart: unless-stopped
-
   loki:
     image: grafana/loki:3.5.0
     container_name: loki
@@ -36,14 +23,13 @@ services:
       - docker_stack
     restart: unless-stopped
 
-  promtail:
-    image: grafana/promtail:3.5.0
-    container_name: promtail
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
     volumes:
-      - /var/lib/docker/containers:/var/lib/docker/containers:ro
-      - /var/log:/var/log
-      - ./promtail/promtail.yml:/etc/promtail/config.yml
-    command: -config.file=/etc/promtail/config.yml
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "3000:3000"
     networks:
       - docker_stack
     restart: unless-stopped
