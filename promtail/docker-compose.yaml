@@ -1,0 +1,16 @@
+services:
+  promtail:
+    image: grafana/promtail:3.5.0
+    container_name: promtail
+    volumes:
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/log:/var/log
+      - ./promtail.yml:/etc/promtail/config.yml
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - docker_stack
+    restart: unless-stopped
+    
+networks:
+  docker_stack:
+    external: true

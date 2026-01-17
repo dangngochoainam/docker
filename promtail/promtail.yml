@@ -1,0 +1,34 @@
+server:
+  http_listen_port: 50060
+  grpc_listen_port: 50061
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: docker-job-name
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: docker-job
+          __path__: /var/lib/docker/containers/*/*.log
+
+  - job_name: codebase-go-grpc-job-name
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: codebase-go-grpc-job
+          __path__: /var/lib/docker/containers/8171fa5de72763a01549227b7558128adbc597007e17e00ad2509c5837542b9a/*.log
+
+  - job_name: postgres-job-name
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: postgres-job
+          __path__: /var/lib/docker/containers/e4426666271a557c9ca9e22d962b64a806a45dbe4360f557b3d435f7bce61b8f/*.log
