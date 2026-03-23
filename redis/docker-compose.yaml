@@ -2,9 +2,10 @@ services:
   redis:
     container_name: redis
     image: redis:7.2
-    command: redis-server --save 60 1 --loglevel warning --requirepass Abc12345
+    command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
-      - redis_data:/var/lib/redis/data
+      - redis_data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
     ports:
       - '6381:6379'
     networks:
