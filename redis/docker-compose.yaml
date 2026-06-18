@@ -1,7 +1,7 @@
 services:
   redis:
     container_name: redis
-    image: redis:7.2
+    image: redis:8.8.0
     command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
       - redis_data:/data

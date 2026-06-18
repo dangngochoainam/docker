@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:1.30.2
 
 RUN rm /etc/nginx/conf.d/default.conf
 

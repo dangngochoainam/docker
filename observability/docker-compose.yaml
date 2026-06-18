@@ -1,6 +1,6 @@
 services:
   prometheus:
-    image: prom/prometheus:latest
+    image: prom/prometheus:v3.8.1
     container_name: prometheus
     volumes:
       - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -14,7 +14,7 @@ services:
     restart: unless-stopped
 
   loki:
-    image: grafana/loki:3.5.0
+    image: grafana/loki:3.6.11
     container_name: loki
     ports:
       - "3100:3100"
@@ -24,7 +24,7 @@ services:
     restart: unless-stopped
 
   grafana:
-    image: grafana/grafana:latest
+    image: grafana/grafana:12.3.7
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
