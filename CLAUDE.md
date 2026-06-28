@@ -19,7 +19,7 @@ docker network create docker_stack
 | Directory | Services | Ports |
 |---|---|---|
 | `postgres/` | PostgreSQL 18.3 | 5434 |
-| `mongo/` | MongoDB 8.0 | 27018 |
+| `mongo/` | MongoDB 8.0 (single-node replica set `rs0`) | 27018 |
 | `redis/` | Redis 8.8.0 | 6381 |
 | `rabbitmq/` | RabbitMQ 4.3.2 + management UI | 15673, 5673 |
 | `minio/` | MinIO `RELEASE.2025-09-07T16-13-09Z` | 9000 (API), 9001 (console) |
@@ -49,6 +49,18 @@ docker compose restart <service_name>
 
 ### Redis
 `redis/redis.conf` enables both RDB snapshots and AOF persistence with hybrid preamble (`aof-use-rdb-preamble yes`). Data is written to `/data` inside the container, mounted as `redis_data` volume.
+
+### MongoDB
+Runs as a **single-node replica set (`rs0`)** so multi-document transactions are supported (transactions require a replica set or sharded cluster — they fail on a standalone `mongod`). The stack is fully automated on `docker compose up -d` via three services:
+- `mongo-keyfile` — one-shot init that generates the replica-set keyfile into the `mongo_keyfile` volume with the ownership/permissions mongod requires (uid/gid `999`, mode `400`).
+- `mongo` — runs `mongod --replSet rs0 --keyFile ... --bind_ip_all`. Data persists in `mongo_data` at `/data/db` (not `/var/lib/mongodb/data`).
+- `mongo-init` — one-shot, idempotent `rs.initiate()` (advertises the member as `mongo:27017`); exits after the replica set is configured.
+
+Enabling a replica set together with auth forces MongoDB to require a keyfile for internal member authentication, even for a single node — hence the `mongo-keyfile` service.
+
+**Connecting:**
+- Internal (docker_stack apps): `mongodb://root:Abc12345@mongo:27017/?replicaSet=rs0&authSource=admin` — transactions supported.
+- From the host (port 27018): `mongodb://root:Abc12345@localhost:27018/?directConnection=true&authSource=admin`. Use `directConnection=true` because the replica set advertises the internal host `mongo:27017`, which the host cannot resolve.
 
 ### RabbitMQ
 Built from `rabbitmq/docker/Dockerfile` (extends the official image with the `rabbitmq_amqp1_0` plugin enabled).
